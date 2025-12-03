@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from backend.app.core.github_client import GitHubClient
-from backend.app.core.security import TokenEncryptor
+from security import GitHubClient
 
 router = APIRouter(prefix="/repo", tags=["Repo Mode"])
 
