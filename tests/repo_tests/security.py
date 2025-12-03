@@ -1,6 +1,6 @@
 import httpx
 from fastapi import HTTPException, status
-from repo_router.py import TokenRequest
+from repo_router import TokenRequest
 
 class GitHubClient:
     BASE_URL = "https://api.github.com"
