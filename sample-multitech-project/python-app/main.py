@@ -1,1 +1,2 @@
-ZGVmIGhlbGxvX3dvcmxkKCk6CiAgICBwcmludCgiSGVsbG8gZnJvbSBjb21taXQgQVBJIikK
+def hello_world():
+    print("Hello from commit API")
