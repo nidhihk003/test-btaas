@@ -1,12 +1,9 @@
+from db import get_user_from_db
 from utils import validate_user
 
-def get_user(user_id: int):
-    user = {"id": user_id, "name": "Dummy Python User"}
-
+def get_user(id:int):
+    user = get_user_from_db(id)
     if not validate_user(user):
-        raise Exception("Invalid user")
-
+        raise Exception("invalid")
     return user
-
-if __name__ == "__main__":
-    print(get_user(1))
+print(get_user(1))
