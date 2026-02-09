@@ -2,43 +2,43 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class UserController_test {
     @Test
-    void getUserWithValidId() {
-        assertEquals(User data for id 1, new UserController().getUser(1));
+    void getUserValidId() {
+        assertEquals(User with ID 1, new UserController().getUser(1));
     }
     @Test
-    void getUserWithNonExistentId() {
-        assertEquals(User not found, new UserController().getUser(999));
+    void getUserNegativeId() {
+        assertEquals(Error: Invalid ID, new UserController().getUser(-1));
     }
     @Test
-    void getUserWithNegativeId() {
-        assertEquals(Invalid user id, new UserController().getUser(-1));
+    void getUserZeroId() {
+        assertEquals(Error: Invalid ID, new UserController().getUser(0));
     }
     @Test
-    void getUserWithZeroId() {
-        assertEquals(Invalid user id, new UserController().getUser(0));
+    void getUserHighId() {
+        assertEquals(User with ID 999999, new UserController().getUser(999999));
     }
     @Test
-    void getUserWithLargeId() {
-        assertEquals(User data for id 2147483647, new UserController().getUser(2147483647));
+    void getUserNonExistentId() {
+        assertEquals(Error: User not found, new UserController().getUser(999999999));
     }
     @Test
-    void getUserWithSmallId() {
-        assertEquals(User data for id 1, new UserController().getUser(1));
+    void getUserStringInsteadOfId() {
+        assertEquals(Error: Invalid ID, new UserController().getUser(Integer.parseInt("abc")));
     }
     @Test
-    void getUserWithNullId() {
-        assertEquals(Invalid user id, new UserController().getUser(null));
+    void getUserSpecialCharId() {
+        assertEquals(Error: Invalid ID, new UserController().getUser(Integer.parseInt("@#$%")));
     }
     @Test
-    void getUserWithNonNumericId() {
-        assertEquals(Invalid user id, new UserController().getUser("abc"));
+    void getUserNullId() {
+        assertEquals(Error: Invalid ID, new UserController().getUser(null));
     }
     @Test
-    void getUserWithBoundaryId() {
-        assertEquals(User data for id 1, new UserController().getUser(1));
+    void getUserBoundaryMinIntId() {
+        assertEquals(Error: Invalid ID, new UserController().getUser(Integer.MIN_VALUE));
     }
     @Test
-    void getUserWithMaxIntId() {
-        assertEquals(User data for id 2147483647, new UserController().getUser(Integer.MAX_VALUE));
+    void getUserBoundaryMaxIntId() {
+        assertEquals(User with ID 2147483647, new UserController().getUser(Integer.MAX_VALUE));
     }
 }
