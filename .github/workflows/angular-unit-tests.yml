@@ -1,0 +1,43 @@
+name: Angular Unit Tests
+
+on:
+  push:
+    branches:
+      - sample-test
+    paths:
+      - "**/*.ts"
+      - "src/**"
+      - "angular.json"
+      - "package.json"
+  workflow_dispatch:
+    inputs:
+      test_path:
+        description: "Specific test path (optional)"
+        required: false
+
+jobs:
+  angular-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular project
+        run: npm run build --if-present
+
+      - name: Run Angular unit tests
+        run: |
+          if [ -n "${{ github.event.inputs.test_path }}" ]; then
+            ng test --watch=false --include="${{ github.event.inputs.test_path }}"
+          else
+            ng test --watch=false --browsers=ChromeHeadless
+          fi
