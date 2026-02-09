@@ -1,0 +1,38 @@
+name: Python Tests
+
+on:
+  push:
+    branches:
+      - sample-test
+    paths:
+      - "**/*.py"
+      - "requirements.txt"
+  workflow_dispatch:
+    inputs:
+      test_path:
+        description: "Specific test file or folder"
+        required: false
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run pytest
+        run: |
+          if [ -n "${{ github.event.inputs.test_path }}" ]; then
+            pytest "${{ github.event.inputs.test_path }}"
+          else
+            pytest
+          fi
