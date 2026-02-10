@@ -2,43 +2,43 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class main_test {
     @Test
-    void addTwoPositiveNumbers() {
+    void addNumbersWithPositiveIntegers() {
         assertEquals(15, Main.addNumbers(5, 10));
     }
     @Test
-    void addPositiveAndNegativeNumber() {
-        assertEquals(5, Main.addNumbers(10, -5));
+    void addNumbersWithNegativeIntegers() {
+        assertEquals(-15, Main.addNumbers(-5, -10));
     }
     @Test
-    void addTwoNegativeNumbers() {
-        assertEquals(-10, Main.addNumbers(-4, -6));
+    void addNumbersWithZeroAndPositiveInteger() {
+        assertEquals(10, Main.addNumbers(0, 10));
     }
     @Test
-    void addNumberWithZeroFirst() {
-        assertEquals(7, Main.addNumbers(0, 7));
+    void addNumbersWithZeroAndNegativeInteger() {
+        assertEquals(-10, Main.addNumbers(0, -10));
     }
     @Test
-    void addNumberWithZeroSecond() {
-        assertEquals(7, Main.addNumbers(7, 0));
-    }
-    @Test
-    void addLargePositiveNumbers() {
-        assertEquals(3000000, Main.addNumbers(1000000, 2000000));
-    }
-    @Test
-    void addLargeNegativeNumbers() {
-        assertEquals(-3000000, Main.addNumbers(-1000000, -2000000));
-    }
-    @Test
-    void addNumberWithZeroBoth() {
+    void addNumbersWithTwoZeros() {
         assertEquals(0, Main.addNumbers(0, 0));
     }
     @Test
-    void addMaxIntegerValues() {
-        assertEquals(2147483646, Main.addNumbers(2147483647, -1));
+    void addNumbersWithLargePositiveIntegers() {
+        assertEquals(3000000, Main.addNumbers(1000000, 2000000));
     }
     @Test
-    void addMinIntegerValues() {
-        assertEquals(-2147483647, Main.addNumbers(-2147483648, 1));
+    void addNumbersWithLargeNegativeIntegers() {
+        assertEquals(-3000000, Main.addNumbers(-1000000, -2000000));
+    }
+    @Test
+    void addNumbersWithPositiveAndNegativeInteger() {
+        assertEquals(-5, Main.addNumbers(5, -10));
+    }
+    @Test
+    void addNumbersWithMaxIntegerValues() {
+        assertEquals(-2147483648, Main.addNumbers(Integer.MAX_VALUE, 1));
+    }
+    @Test
+    void addNumbersWithMinIntegerValues() {
+        assertEquals(2147483647, Main.addNumbers(Integer.MIN_VALUE, -1));
     }
 }
