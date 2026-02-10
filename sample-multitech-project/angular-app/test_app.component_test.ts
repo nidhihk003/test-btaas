@@ -8,8 +8,8 @@ describe('app.component_test', () => {
   test('addTwoNegativeNumbers', () => {
     expect(new AppComponent().add(-4, -6)).toBe(-10);
   });
-  test('addPositiveNumberAndZero', () => {
-    expect(new AppComponent().add(9, 0)).toBe(9);
+  test('addZeroAndPositiveNumber', () => {
+    expect(new AppComponent().add(0, 9)).toBe(9);
   });
   test('addZeroAndNegativeNumber', () => {
     expect(new AppComponent().add(0, -3)).toBe(-3);
@@ -17,16 +17,16 @@ describe('app.component_test', () => {
   test('addTwoZeros', () => {
     expect(new AppComponent().add(0, 0)).toBe(0);
   });
-  test('addWithFirstParameterAsMaxNumber', () => {
-    expect(new AppComponent().add(Number.MAX_VALUE, 1)).toBe(1.7976931348623157e+308);
+  test('addLargeNumbers', () => {
+    expect(new AppComponent().add(1000000, 2000000)).toBe(3000000);
   });
-  test('addWithSecondParameterAsMaxNumber', () => {
-    expect(new AppComponent().add(1, Number.MAX_VALUE)).toBe(1.7976931348623157e+308);
+  test('addNumberAndInfinity', () => {
+    expect(new AppComponent().add(5, Infinity)).toBe(inf);
   });
-  test('addWithFirstParameterAsMinNumber', () => {
-    expect(new AppComponent().add(Number.MIN_VALUE, 1)).toBe(1);
+  test('addNumberAndNaN', () => {
+    expect(new AppComponent().add(4, NaN)).toBe(nan);
   });
-  test('addWithSecondParameterAsMinNumber', () => {
-    expect(new AppComponent().add(1, Number.MIN_VALUE)).toBe(1);
+  test('addNumberAndNull', () => {
+    expect(new AppComponent().add(4, null)).toBe(4);
   });
 });
