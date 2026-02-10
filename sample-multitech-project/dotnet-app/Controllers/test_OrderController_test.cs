@@ -1,43 +1,39 @@
 using Xunit;
 public class OrderController_test {
     [Fact]
-    public void GetOrderWithValidId() {
-        Assert.Equal(OkObjectResult, new OrderController().Get(1));
+    public void Get_ValidId_ReturnsOk() {
+        Assert.Equal(Ok(result), new OrderController().Get(1));
     }
     [Fact]
-    public void GetOrderWithNegativeId() {
-        Assert.Equal(OkObjectResult, new OrderController().Get(-1));
+    public void Get_NegativeId_ReturnsOkWithCreatedOrder() {
+        Assert.Equal(Ok(result), new OrderController().Get(-1));
     }
     [Fact]
-    public void GetOrderWithZeroId() {
-        Assert.Equal(OkObjectResult, new OrderController().Get(0));
+    public void Get_ZeroId_ReturnsOkWithCreatedOrder() {
+        Assert.Equal(Ok(result), new OrderController().Get(0));
     }
     [Fact]
-    public void GetOrderWithLargeId() {
-        Assert.Equal(OkObjectResult, new OrderController().Get(2147483647));
+    public void Get_LargeId_ReturnsOkWithCreatedOrder() {
+        Assert.Equal(Ok(result), new OrderController().Get(1000000));
     }
     [Fact]
-    public void GetOrderWithMinIntId() {
-        Assert.Equal(OkObjectResult, new OrderController().Get(-2147483648));
+    public void Get_MaxIntId_ReturnsOkWithCreatedOrder() {
+        Assert.Equal(Ok(result), new OrderController().Get(int.MaxValue));
     }
     [Fact]
-    public void GetOrderWithNullId() {
-        Assert.Equal(OkObjectResult, new OrderController().Get(null));
+    public void Get_MinIntId_ReturnsOkWithCreatedOrder() {
+        Assert.Equal(Ok(result), new OrderController().Get(int.MinValue));
     }
     [Fact]
-    public void GetOrderWithMaxIntPlusOneId() {
-        Assert.Equal(OkObjectResult, new OrderController().Get(2147483648));
+    public void Get_SmallNegativeId_ReturnsOkWithCreatedOrder() {
+        Assert.Equal(Ok(result), new OrderController().Get(-1000));
     }
     [Fact]
-    public void GetOrderWithMinIntMinusOneId() {
-        Assert.Equal(OkObjectResult, new OrderController().Get(-2147483649));
+    public void Get_NullId_ThrowsArgumentNullException() {
+        Assert.Equal(throws ArgumentNullException, new OrderController().Get(null));
     }
     [Fact]
-    public void GetOrderWithInvalidIdType() {
-        Assert.Equal(OkObjectResult, new OrderController().Get("invalid"));
-    }
-    [Fact]
-    public void GetOrderWithSpecialCharacterId() {
-        Assert.Equal(OkObjectResult, new OrderController().Get("!@#$%^&*()"));
+    public void Get_ValidId_ReturnsTypeIActionResult() {
+        Assert.Equal(is IActionResult, new OrderController().Get(123));
     }
 }
