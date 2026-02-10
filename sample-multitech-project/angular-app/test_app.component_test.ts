@@ -1,32 +1,32 @@
 describe('app.component_test', () => {
-  test('addTwoPositiveNumbers', () => {
-    expect(new AppComponent().add(3, 5)).toBe(8);
+  test('addWithPositiveNumbers', () => {
+    expect(appComponent.add(5, 3)).toBe(8);
   });
-  test('addPositiveAndNegativeNumber', () => {
-    expect(new AppComponent().add(7, -2)).toBe(5);
+  test('addWithNegativeNumbers', () => {
+    expect(appComponent.add(-5, -3)).toBe(-8);
   });
-  test('addTwoNegativeNumbers', () => {
-    expect(new AppComponent().add(-4, -6)).toBe(-10);
+  test('addWithPositiveAndNegativeNumbers', () => {
+    expect(appComponent.add(5, -3)).toBe(2);
   });
-  test('addZeroAndPositiveNumber', () => {
-    expect(new AppComponent().add(0, 9)).toBe(9);
+  test('addWithZero', () => {
+    expect(appComponent.add(0, 0)).toBe(0);
   });
-  test('addZeroAndNegativeNumber', () => {
-    expect(new AppComponent().add(0, -3)).toBe(-3);
+  test('addWithPositiveNumberAndZero', () => {
+    expect(appComponent.add(5, 0)).toBe(5);
   });
-  test('addTwoZeros', () => {
-    expect(new AppComponent().add(0, 0)).toBe(0);
+  test('addWithNegativeNumberAndZero', () => {
+    expect(appComponent.add(-5, 0)).toBe(-5);
   });
-  test('addLargeNumbers', () => {
-    expect(new AppComponent().add(1000000, 2000000)).toBe(3000000);
+  test('addWithLargeNumbers', () => {
+    expect(appComponent.add(1000000, 2000000)).toBe(3000000);
   });
-  test('addNumberAndInfinity', () => {
-    expect(new AppComponent().add(5, Infinity)).toBe(inf);
+  test('addWithMinimumSafeInteger', () => {
+    expect(appComponent.add(Number.MIN_SAFE_INTEGER, 1)).toBe(-9007199254740990);
   });
-  test('addNumberAndNaN', () => {
-    expect(new AppComponent().add(4, NaN)).toBe(nan);
+  test('addWithMaximumSafeInteger', () => {
+    expect(appComponent.add(Number.MAX_SAFE_INTEGER, -1)).toBe(9007199254740990);
   });
-  test('addNumberAndNull', () => {
-    expect(new AppComponent().add(4, null)).toBe(4);
+  test('addWithInvalidInputs', () => {
+    expect(appComponent.add('5', 3)).toBe(nan);
   });
 });
