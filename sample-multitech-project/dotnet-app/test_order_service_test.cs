@@ -1,7 +1,7 @@
 using Xunit;
 public class order_service_test {
     [Fact]
-    public void CreateOrderWithValidId() {
+    public void CreateOrderWithPositiveId() {
         Assert.Equal({'Id': 1, 'Status': 'Created'}, new OrderService().CreateOrder(1));
     }
     [Fact]
@@ -13,11 +13,15 @@ public class order_service_test {
         Assert.Equal({'Id': -1, 'Status': 'Created'}, new OrderService().CreateOrder(-1));
     }
     [Fact]
-    public void CreateOrderWithMaxIntId() {
-        Assert.Equal({'Id': 2147483647, 'Status': 'Created'}, new OrderService().CreateOrder(int.MaxValue));
+    public void CreateOrderWithLargePositiveId() {
+        Assert.Equal({'Id': 2147483647, 'Status': 'Created'}, new OrderService().CreateOrder(2147483647));
     }
     [Fact]
-    public void CreateOrderWithMinIntId() {
-        Assert.Equal({'Id': -2147483648, 'Status': 'Created'}, new OrderService().CreateOrder(int.MinValue));
+    public void CreateOrderWithLargeNegativeId() {
+        Assert.Equal({'Id': -2147483648, 'Status': 'Created'}, new OrderService().CreateOrder(-2147483648));
+    }
+    [Fact]
+    public void CreateOrderWithTypicalId() {
+        Assert.Equal({'Id': 12345, 'Status': 'Created'}, new OrderService().CreateOrder(12345));
     }
 }
