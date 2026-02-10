@@ -1,0 +1,38 @@
+name: .NET Tests
+
+on:
+  push:
+    branches:
+      - sample-test
+    paths:
+      - "**/*.cs"
+      - "**/*.csproj"
+      - "**/*.sln"
+  workflow_dispatch:
+    inputs:
+      test_path:
+        description: "Specific test project or dll"
+        required: false
+
+jobs:
+  dotnet-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run tests
+        run: |
+          if [ -n "${{ github.event.inputs.test_path }}" ]; then
+            dotnet test "${{ github.event.inputs.test_path }}"
+          else
+            dotnet test
+          fi
